@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="weixintong_ios_suite">
+    <parameter name = "zyf_account" value = "00100303623"/> <!--赵勇飞 -->
+    <parameter name = "zyf_password" value = "654321"/>
+
+    <!-- 注册监听器-->
+    <listeners>
+        <!-- 失败错误截图监听器-->
+        <listener class-name="com.wxt.listeners.TestListener"></listener>
+        <!-- 失败重跑监听器 -->
+        <!--<listener class-name="com.wxt.listeners.RerunListener"></listener>-->
+
+        <listener class-name="org.uncommons.reportng.HTMLReporter"></listener><!--测试报告生成-添加监听 -->
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"></listener><!--测试报告生成-添加监听 -->
+
+    </listeners>
+
+    <test name="login-module" parallel="false"> <!-- <test>下的<parameter>会覆盖在<suite>下声明的同名变量-->
+        <!--<parameter name = "zyf_account" value = "00100303623"/>
+        <parameter name = "zyf_password" value = "654321"/>-->
+        <classes>
+            <class name="com.wxt.testcase.personalcenter.personalcenter_003__requirement_Test">
+                <methods>
+                    <include name="createRequirement"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

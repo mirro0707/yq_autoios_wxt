@@ -1,0 +1,72 @@
+场景：
+多平台分发脚本运行（真机或模拟器）
+mac上：grid服务器，一个ios模拟器
+windows:两个node节点（两个appium server）两个安卓模拟器
+
+***********************************************************
+命令：
+cd /Users/yq/IdeaProjects/weixin_projects/weixintong/grid
+java -jar selenium-server-standalone-3.6.0.jar -role hub
+
+"Nodes should register to http://192.168.1.106:4444/grid/register/"
+
+nodeconfig地址：/Users/yq/IdeaProjects/weixin_projects/weixintong/grid/mac/nodeconfig_ios.json
+appium -a 127.0.0.1 -p 4723 -bp 4724   --selendroid-port 8080  --session-override --nodeconfig nodeconfig_ios.json
+
+*********************************************************************
+
+{
+  "capabilities":
+      [
+        {
+          "browserName": "appium-test-avd",//device name,例如iPhone5,iPad4
+          "version":"4.4.2",   //ios或则android版本
+          "maxInstances": 1,
+          "platform":"ANDROID"  //MAC或者ANDROID
+        }
+      ],
+  //hub与node配置
+  "configuration":
+  {
+    "cleanUpCycle":2000,
+    "timeout":30000,
+    "proxy": "org.openqa.grid.selenium.proxy.DefaultRemoteProxy",
+    "url":"http://192.168.1.109:4723/wd/hub",                 //appium server的地址，即node地址
+    "host": "192.168.1.109",                                  //appium server的IP
+    "port": 4723,                                         //appium server的端口
+    "maxSession": 1,
+    "register": true,
+    "registerCycle": 5000,
+    "hubPort": 4444,                                      //hub 端口(不指定默认是4444）
+    "hubHost": "192.168.1.106"                            //hub IP
+  }
+}
+
+
+
+
+打开mac电脑中默认设置的版本的多个模拟器
+open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app
+打开windows电脑中默认设置的版本的多个模拟器
+C:\Users\YQ\AppData\Local\Programs\appium-desktop\Appium.exe
+
+
+*******************************************************
+Starting a Hub（The default port used by the hub is 4444）
+java -jar selenium-server-standalone-3.6.0.jar -role hub
+java -jar selenium-server-standalone-2.44.0.jar -role hub -port 4441 （指定hub端口是4441）
+
+Starting a Node
+java -jar selenium-server-standalone-2.44.0.jar -role node  -hub http://localhost:4444/grid/register
+
+register appium server with a local Selenium grid
+appium --nodeconfig /path/to/nodeconfig.json
+
+
+
+
+
+
+
+
+

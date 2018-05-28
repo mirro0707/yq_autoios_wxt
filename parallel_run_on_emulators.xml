@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="weixintong_autotest_androidsuite" parallel="tests" thread-count="5">
+
+
+    <test name="login-ios1" >
+        <parameter name = "appiumServerPort" value = "4723"/>
+        <!--<parameter name = "deviceName" value = "emulator-5556"/>-->
+        <parameter name = "udid" value = "iPhone 7 Plus"/>
+
+        <classes>
+            <class name="com.yq.parallel.HelloIosSimulator1">
+                <methods>
+                    <include name="yqLoginTest3"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="login-android1" >
+        <parameter name = "appiumServerPort" value = "4725"/>
+        <!--<parameter name = "deviceName" value = "emulator-5554"/>-->
+        <parameter name = "udid" value = "emulator-5554"/>
+
+        <classes>
+            <class name="com.yq.parallel.HelloAndroidEmulator1">
+                <methods>
+                    <include name="yqLoginTest1"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test name="login-android2" >
+        <parameter name = "appiumServerPort" value = "4727"/>
+        <!--<parameter name = "deviceName" value = "emulator-5556"/>-->
+        <parameter name = "udid" value = "emulator-5556"/>
+
+        <classes>
+            <class name="com.yq.parallel.HelloAndroidEmulator2">
+                <methods>
+                    <include name="yqLoginTest2"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
